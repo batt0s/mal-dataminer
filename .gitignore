@@ -1,0 +1,7 @@
+notes.md
+__pycache__/
+token.json
+Pipfile
+data/
+notebooks/
+tmp/
