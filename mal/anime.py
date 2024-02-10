@@ -54,7 +54,7 @@ class Anime:
             status=json_obj['status'],
             genres=[genre['name'] for genre in json_obj['genres']],
             num_episodes=json_obj['num_episodes'],
-            source=json_obj['source'],
+            source=json_obj['source'] if 'source' in json_obj else "",
             average_episode_duration_seconds=json_obj['average_episode_duration'],
             rating=json_obj['rating'],
             studios=[studio['name'] for studio in json_obj['studios']],
