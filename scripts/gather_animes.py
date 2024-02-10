@@ -21,7 +21,7 @@ def main() -> int:
     start_id = sys.argv[2]
     stop_id = sys.argv[3]
     if start_id == "continue":
-        start_id = continue_id()
+        start_id = continue_id(filepath)
     anime.gather_animes_and_write_to_csv(csv_file=filepath,
                                          start_id=int(start_id),
                                          stop_id=int(stop_id),
