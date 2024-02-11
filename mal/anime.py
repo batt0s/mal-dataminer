@@ -52,12 +52,12 @@ class Anime:
             nsfw=True if json_obj['nsfw'] != "white" else False,
             media_type=json_obj['media_type'],
             status=json_obj['status'],
-            genres=[genre['name'] for genre in json_obj['genres']],
+            genres=",".join(json_obj["genres"]),
             num_episodes=json_obj['num_episodes'],
             source=json_obj['source'] if 'source' in json_obj else "",
             average_episode_duration_seconds=json_obj['average_episode_duration'],
             rating=json_obj['rating'] if 'rating' in json_obj else "",
-            studios=[studio['name'] for studio in json_obj['studios']],
+            studios=",".join(json_obj["studios"]),
             num_list_users=json_obj['num_list_users'],
             num_scoring_users=json_obj['num_scoring_users'],
             watching=int(json_obj['statistics']['status']['watching']),
@@ -172,7 +172,11 @@ def gather_animes_and_write_to_csv(csv_file: str,
         except HTTPError as err:
             if err.response.status_code == 404:
                 print(f"Anime with ID {id} not found, skipping.")
-                continue
+            else:
+                print(str(err))
+            continue
+        except KeyError:
+            continue
         if id == start_id and new_file:
             write_anime_list_to_csv(csv_file=csv_file,
                                     anime_list=[anime],
